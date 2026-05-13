@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#b8d330">
+  <title>马小溪手工饺子 · 我们的店</title>
+  <style>
+    :root {
+      --green: #b8d330;
+      --green-dark: #6f8f12;
+      --orange: #e8a766;
+      --orange-dark: #bd6f25;
+      --cream: #fff9ec;
+      --paper: #fffdf6;
+      --wood: #9b6a3b;
+      --ink: #2f3026;
+      --muted: #787563;
+      --line: #eadfbe;
+      --good: #549b48;
+      --warn: #c46c34;
+      --teal: #2f9c95;
+      --shadow: 0 18px 48px rgba(86, 72, 36, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--cream);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      letter-spacing: 0;
+      background:
+        radial-gradient(circle at 85% 4%, rgba(47, 156, 149, .12), transparent 28%),
+        linear-gradient(90deg, rgba(184, 211, 48, .08) 1px, transparent 1px),
+        linear-gradient(rgba(184, 211, 48, .08) 1px, transparent 1px),
+        var(--cream);
+      background-size: 28px 28px;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 18px 90px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin: -18px -18px 16px;
+      padding: 14px 18px;
+      background: rgba(255, 249, 236, .9);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(234, 223, 190, .75);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--green);
+      color: #314000;
+      font-weight: 900;
+      box-shadow: 0 8px 22px rgba(111, 143, 18, .2);
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #465b08;
+      background: rgba(184, 211, 48, .22);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid rgba(234, 223, 190, .9);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(90deg, rgba(47, 156, 149, .12), transparent 32%, rgba(255,255,255,0) 68%, rgba(184, 211, 48, .12)),
+        radial-gradient(circle at 12% 18%, rgba(184, 211, 48, .32), transparent 30%),
+        linear-gradient(135deg, #fffef8 0%, #fff2d2 100%);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0 11px, rgba(47, 156, 149, .12) 11px 12px, transparent 12px 96px),
+        linear-gradient(transparent 0 96%, rgba(47, 156, 149, .12));
+      background-size: 96px 96px, 100% 18px;
+      opacity: .45;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-copy {
+      padding: clamp(26px, 5vw, 58px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .hero-copy h2 {
+      margin: 0;
+      max-width: 700px;
+      font-size: clamp(34px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 560px;
+      margin: 0;
+      color: #58543f;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(47, 48, 38, .12);
+    }
+
+    .btn.secondary {
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .btn.small {
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    .kitchen-art {
+      position: relative;
+      min-height: 340px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, 0)),
+        linear-gradient(135deg, rgba(184, 211, 48, .8), rgba(232, 167, 102, .92));
+      overflow: hidden;
+    }
+
+    .shop-window {
+      position: absolute;
+      inset: 26px 24px auto;
+      height: 54%;
+      border: 10px solid rgba(255, 253, 246, .82);
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, rgba(255, 253, 246, .48) 0 2px, transparent 2px 50%, rgba(255, 253, 246, .48) 50% calc(50% + 2px), transparent calc(50% + 2px)),
+        linear-gradient(180deg, rgba(255, 255, 255, .78), rgba(255, 255, 255, .18));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.5), 0 20px 50px rgba(111, 72, 20, .18);
+    }
+
+    .signboard {
+      position: absolute;
+      top: 46px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(76%, 340px);
+      padding: 13px 10px;
+      text-align: center;
+      border-radius: 16px;
+      color: #334300;
+      background: var(--green);
+      font-weight: 900;
+      box-shadow: 0 9px 20px rgba(65, 75, 6, .16);
+    }
+
+    .booth {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 44px;
+      height: 110px;
+      border-radius: 28px 28px 12px 12px;
+      background: var(--orange);
+      box-shadow: inset 0 22px 0 rgba(255, 246, 228, .56), 0 22px 34px rgba(102, 57, 19, .14);
+    }
+
+    .table {
+      position: absolute;
+      left: 18%;
+      right: 18%;
+      bottom: 24px;
+      height: 48px;
+      border-radius: 50%;
+      background: #a87541;
+      box-shadow: 0 14px 0 #805027;
+    }
+
+    .dumpling-plate {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      width: 165px;
+      height: 64px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: #fffdf6;
+      box-shadow: inset 0 -7px 0 rgba(234, 223, 190, .85);
+    }
+
+    .dumpling {
+      position: absolute;
+      bottom: 32px;
+      width: 42px;
+      height: 28px;
+      border-radius: 26px 26px 12px 12px;
+      background: #fff8db;
+      border: 2px solid #e9d993;
+      box-shadow: inset 0 5px 0 rgba(255,255,255,.8);
+    }
+
+    .dumpling::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      right: 7px;
+      top: 6px;
+      height: 10px;
+      border-top: 2px dotted #d6bd64;
+      border-radius: 50%;
+    }
+
+    .d1 { left: 34px; transform: rotate(-9deg); }
+    .d2 { left: 62px; bottom: 36px; }
+    .d3 { right: 36px; transform: rotate(8deg); }
+
+    .section {
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 253, 246, .9);
+      border: 1px solid rgba(234, 223, 190, .92);
+      box-shadow: 0 14px 34px rgba(86, 72, 36, .08);
+    }
+
+    .section-head {
+      display: flex;
+      gap: 12px;
+      align-items: end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section h3 {
+      margin: 0;
+      font-size: clamp(21px, 3vw, 30px);
+    }
+
+    .section-desc {
+      margin: 5px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid.cards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fffefa;
+      padding: 16px;
+      box-shadow: 0 10px 22px rgba(86, 72, 36, .06);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: 0;
+      height: 3px;
+      border-radius: 0 0 999px 999px;
+      background: linear-gradient(90deg, var(--green), var(--teal), var(--orange));
+      opacity: .45;
+    }
+
+    .metric small {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(25px, 4vw, 40px);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .trend {
+      color: var(--good);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .trend.down { color: var(--warn); }
+
+    .progress {
+      width: 100%;
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #efe6ca;
+    }
+
+    .bar {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--orange));
+      transition: width .35s ease;
+    }
+
+    .ledger {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      color: #5c5a49;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .field input, .field textarea, .field select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #dfd2ac;
+      border-radius: 14px;
+      background: #fffdf8;
+      color: var(--ink);
+      padding: 10px 12px;
+      outline: 0;
+    }
+
+    .field textarea {
+      min-height: 88px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--green-dark);
+      box-shadow: 0 0 0 4px rgba(184, 211, 48, .22);
+    }
+
+    .entry-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .entry-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .entry-group h4 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .entry-line {
+      display: grid;
+      grid-template-columns: 1fr 1fr minmax(96px, .8fr) 38px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .entry-line input, .entry-line select {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid #dfd2ac;
+      border-radius: 13px;
+      background: #fffdf8;
+      color: var(--ink);
+      padding: 8px 10px;
+      outline: 0;
+    }
+
+    .icon-btn {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--ink);
+      background: #f3ead1;
+      font-weight: 900;
+    }
+
+    .quick-add {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .totals {
+      position: sticky;
+      top: 86px;
+    }
+
+    #saveLedger {
+      width: 100%;
+      margin-top: 8px;
+      position: sticky;
+      bottom: 78px;
+      z-index: 10;
+    }
+
+    .calc-row, .list-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #e3d6b6;
+    }
+
+    .calc-row:last-child, .list-row:last-child {
+      border-bottom: 0;
+    }
+
+    .calc-row span, .list-row span {
+      color: var(--muted);
+    }
+
+    .calc-row strong, .list-row strong {
+      text-align: right;
+    }
+
+    .chart {
+      height: 180px;
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      padding: 16px 10px 8px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fffdf8, #fff4d9);
+      border: 1px solid var(--line);
+    }
+
+    .chart i {
+      flex: 1;
+      min-width: 12px;
+      border-radius: 12px 12px 5px 5px;
+      background: linear-gradient(180deg, var(--green), var(--orange));
+      box-shadow: 0 8px 14px rgba(189, 111, 37, .12);
+    }
+
+    .line-chart {
+      width: 100%;
+      height: 180px;
+      display: block;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fffdf8, #fff4d9);
+      border: 1px solid var(--line);
+    }
+
+    .tabs {
+      position: sticky;
+      bottom: 12px;
+      z-index: 30;
+      max-width: 760px;
+      margin: 18px auto 0;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      padding: 7px;
+      border-radius: 22px;
+      background: rgba(47, 48, 38, .88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 40px rgba(47, 48, 38, .25);
+    }
+
+    .tab {
+      min-height: 48px;
+      border-radius: 16px;
+      color: rgba(255,255,255,.74);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .tab.active {
+      color: #334300;
+      background: var(--green);
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .menu-card {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 13px;
+      align-items: center;
+    }
+
+    .food-art {
+      width: 72px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: #fff2d2;
+      border: 1px solid #ead9a7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .food-art::before, .food-art::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: #fffdf6;
+      border: 2px solid #e4d089;
+    }
+
+    .food-art::before {
+      width: 38px;
+      height: 24px;
+      transform: rotate(-18deg);
+      left: 12px;
+      top: 24px;
+    }
+
+    .food-art::after {
+      width: 40px;
+      height: 25px;
+      transform: rotate(16deg);
+      right: 10px;
+      bottom: 19px;
+    }
+
+    .menu-card h4, .milestone h4 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .menu-card p, .milestone p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .price {
+      color: var(--orange-dark);
+      font-weight: 900;
+    }
+
+    .status-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-card strong {
+      font-size: 20px;
+    }
+
+    .investment-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .investment-row {
+      display: grid;
+      grid-template-columns: 86px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fffdf8;
+    }
+
+    .tag {
+      display: inline-flex;
+      justify-content: center;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #465b08;
+      background: rgba(184, 211, 48, .22);
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .investment-row span:nth-child(2) {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .investment-row strong {
+      white-space: nowrap;
+      color: var(--orange-dark);
+    }
+
+    .milestone {
+      position: relative;
+      padding-left: 48px;
+    }
+
+    .milestone::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 18px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #efe6ca;
+      border: 4px solid #fffefa;
+      box-shadow: 0 0 0 1px var(--line);
+    }
+
+    .milestone.done::before {
+      background: var(--green);
+      box-shadow: 0 0 0 1px var(--green-dark), 0 0 0 8px rgba(184, 211, 48, .2);
+    }
+
+    .message {
+      padding: 13px 14px;
+      border-radius: 17px;
+      background: #fff3d9;
+      line-height: 1.6;
+    }
+
+    .message.me {
+      background: rgba(184, 211, 48, .22);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 86px;
+      z-index: 50;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(47, 48, 38, .92);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      box-shadow: 0 14px 34px rgba(47, 48, 38, .2);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .confetti b {
+      position: absolute;
+      top: -20px;
+      width: 10px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--green);
+      animation: fall 1.8s ease-in forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(620deg);
+        opacity: .15;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .app { padding: 14px 12px 94px; }
+      .topbar { margin: -14px -12px 14px; padding: 12px; }
+      .hero { grid-template-columns: 1fr; border-radius: 20px; }
+      .hero-copy { padding: 26px 20px; }
+      .kitchen-art { min-height: 260px; order: -1; }
+      .grid.cards, .grid.three, .grid.two, .ledger { grid-template-columns: 1fr; }
+      .entry-board { grid-template-columns: 1fr; }
+      .entry-line { grid-template-columns: 1fr 1fr; }
+      .entry-line .icon-btn { width: 100%; }
+      .section { padding: 17px; border-radius: 20px; }
+      .section-head { align-items: start; flex-direction: column; }
+      .totals { position: static; }
+      .tabs { grid-template-columns: repeat(4, 1fr); bottom: 8px; }
+      .tab { min-height: 42px; font-size: 11px; }
+      .pill.optional { display: none; }
+      .investment-row { grid-template-columns: 70px 1fr; }
+      .investment-row strong { grid-column: 2; text-align: left; }
+    }
+
+    @media (min-width: 861px) {
+      .page.active .section:first-child { margin-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">马</div>
+        <div>
+          <h1>马小溪手工饺子</h1>
+          <p>ma xiao xi shou gong jiao zi</p>
+        </div>
+      </div>
+      <div class="pill optional">清真手作 · 加盟 13119011166</div>
+    </header>
+
+    <section class="hero" id="home-hero">
+      <div class="hero-copy">
+        <span class="pill" id="openDay">开业倒计时</span>
+        <h2>十年用心包，一口好味道</h2>
+        <p id="dailyLine">一家店要看见现金、成本、客人和复购。每天多清楚一点，生意就多稳一点。</p>
+        <div class="hero-actions">
+          <a class="btn" href="#ledger" data-tab-link="ledger">记今天的账</a>
+          <a class="btn secondary" href="#partner" data-tab-link="partner">看经营概览</a>
+        </div>
+      </div>
+      <div class="kitchen-art" aria-label="温暖明亮的饺子店插画">
+        <div class="shop-window"></div>
+        <div class="signboard">马小溪手工饺子</div>
+        <div class="booth"></div>
+        <div class="table"></div>
+        <div class="dumpling-plate">
+          <i class="dumpling d1"></i>
+          <i class="dumpling d2"></i>
+          <i class="dumpling d3"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="page active" id="page-today">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>今天的店</h3>
+            <p class="section-desc">两个时区，一套账。中国店里的烟火气，墨西哥这边也能看见。</p>
+          </div>
+          <button class="btn small secondary" id="seedDemo" type="button">填一份示例数据</button>
+        </div>
+        <div class="grid two">
+          <article class="card status-card">
+            <span class="tag">北京时间</span>
+            <strong id="beijingDate">加载中</strong>
+            <p class="section-desc" id="beijingTime">--:--</p>
+          </article>
+          <article class="card status-card">
+            <span class="tag">墨西哥时间</span>
+            <strong id="mexicoDate">加载中</strong>
+            <p class="section-desc" id="mexicoTime">--:--</p>
+          </article>
+        </div>
+        <div class="grid cards">
+          <article class="card metric">
+            <small>今日营业额 <span class="trend" id="revenueTrend">↑ 0%</span></small>
+            <strong id="todayRevenue">¥0</strong>
+          </article>
+          <article class="card metric">
+            <small>今日订单数 <span class="trend" id="orderTrend">↑ 0%</span></small>
+            <strong id="todayOrders">0</strong>
+          </article>
+          <article class="card metric">
+            <small>今日净利润 <span class="trend" id="profitTrend">↑ 0%</span></small>
+            <strong id="todayProfit">¥0</strong>
+          </article>
+          <article class="card metric">
+            <small>今日支出 <span>归入成本</span></small>
+            <strong id="todayExpense">¥0</strong>
+          </article>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>本月进度</h3>
+            <p class="section-desc">先按 10,000 元做一个轻目标，开业后再按真实情况调整。</p>
+          </div>
+          <span class="pill" id="monthTargetText">目标 ¥10,000</span>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <div class="calc-row"><span>本月营业额</span><strong id="monthRevenue">¥0</strong></div>
+            <div class="progress"><div class="bar" id="monthBar"></div></div>
+            <div class="calc-row"><span>距离目标还差</span><strong id="monthGap">¥0</strong></div>
+            <div class="calc-row"><span>本月累计净利润</span><strong id="monthProfit">¥0</strong></div>
+          </article>
+          <article class="card">
+            <div class="calc-row"><span>本月累计支出</span><strong id="monthExpense">¥0</strong></div>
+            <div class="calc-row"><span>本月客单均值</span><strong id="monthAvgOrder">¥0</strong></div>
+            <div class="calc-row"><span>月工资预留</span><strong>¥4,000</strong></div>
+            <div class="calc-row"><span>本月送货费用</span><strong id="deliveryFeeMonth">¥0</strong></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>生意小图表</h3>
+            <p class="section-desc">线条看最近 7 天营业额，柱子看最近 30 天净利润。</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <svg class="line-chart" id="revenueLine" viewBox="0 0 520 180" role="img" aria-label="最近7天营业额折线图"></svg>
+          <div class="chart" id="profitBars" aria-label="最近30天净利润柱状图"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-ledger">
+      <div class="section" id="ledger">
+        <div class="section-head">
+          <div>
+            <h3>记账本</h3>
+            <p class="section-desc">打烊后填几个数字，保存后自动算收入、支出和净利润。</p>
+          </div>
+          <button class="btn small secondary" id="exportCsv" type="button">导出账本</button>
+        </div>
+        <div class="ledger">
+          <form class="card" id="ledgerForm">
+            <div class="field"><label for="orders">今日订单数</label><input id="orders" inputmode="numeric" placeholder="比如 86"></div>
+            <div class="entry-board">
+              <div class="entry-group">
+                <h4>收入条目</h4>
+                <div class="quick-add">
+                  <button class="btn small secondary" type="button" data-add-income="微信收款">+ 微信</button>
+                  <button class="btn small secondary" type="button" data-add-income="支付宝收款">+ 支付宝</button>
+                  <button class="btn small secondary" type="button" data-add-income="现金收款">+ 现金</button>
+                  <button class="btn small secondary" type="button" data-add-income="外卖平台">+ 外卖</button>
+                </div>
+                <div id="incomeItems"></div>
+                <button class="btn small secondary" type="button" id="addIncome">+ 加一条收入</button>
+              </div>
+              <div class="entry-group">
+                <h4>支出条目</h4>
+                <div class="quick-add">
+                  <button class="btn small secondary" type="button" data-add-expense="食材采购">+ 食材</button>
+                  <button class="btn small secondary" type="button" data-add-expense="房租水电">+ 水电</button>
+                  <button class="btn small secondary" type="button" data-add-expense="雇员工资">+ 工资</button>
+                  <button class="btn small secondary" type="button" data-add-expense="送货费">+ 送货</button>
+                </div>
+                <div id="expenseItems"></div>
+                <button class="btn small secondary" type="button" id="addExpense">+ 加一条支出</button>
+              </div>
+            </div>
+            <div class="field"><label for="note">今天的小记录</label><textarea id="note" placeholder="比如：今天第一桌客人夸酸菜馅好吃。"></textarea></div>
+            <button class="btn" id="saveLedger" type="button">保存今天</button>
+          </form>
+          <aside class="card totals">
+            <div class="calc-row"><span>今日总收入</span><strong id="calcRevenue">¥0</strong></div>
+            <div class="calc-row"><span>今日总支出</span><strong id="calcExpense">¥0</strong></div>
+            <div class="calc-row"><span>今日净利润</span><strong id="calcProfit">¥0</strong></div>
+            <p class="section-desc">保存后会留在这台设备里。未来接 Supabase 时，这些字段可以直接搬过去。</p>
+          </aside>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>历史账本</h3>
+            <p class="section-desc">最近记录会排在前面，方便截图给家里人看。</p>
+          </div>
+        </div>
+        <div class="card" id="historyList"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-partner">
+      <div class="section" id="partner">
+        <div class="section-head">
+          <div>
+            <h3>经营概览</h3>
+            <p class="section-desc">只看店铺经营状态，不展示个人分配信息。</p>
+          </div>
+          <span class="pill">内部查看</span>
+        </div>
+        <div class="grid three">
+          <article class="card metric"><small>开店已记录支出</small><strong>¥145,578</strong></article>
+          <article class="card metric"><small>累计营业额</small><strong id="totalRevenue">¥0</strong></article>
+          <article class="card metric"><small>累计订单数</small><strong id="totalOrders">0</strong></article>
+        </div>
+        <div class="grid two" style="margin-top:14px">
+          <article class="card">
+            <div class="calc-row"><span>累计支出</span><strong id="totalExpense">¥0</strong></div>
+            <div class="calc-row"><span>累计净利润</span><strong id="totalProfit">¥0</strong></div>
+            <div class="calc-row"><span>平均客单价</span><strong id="avgTicket">¥0</strong></div>
+            <div class="progress"><div class="bar" id="revenueBar"></div></div>
+          </article>
+          <article class="card">
+            <div class="calc-row"><span>已记录天数</span><strong id="recordDays">0 天</strong></div>
+            <div class="calc-row"><span>日均营业额</span><strong id="avgDailyRevenue">¥0</strong></div>
+            <div class="calc-row"><span>本月目标完成</span><strong id="monthRate">0%</strong></div>
+            <div class="calc-row"><span>数据口径</span><strong>仅经营统计</strong></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>目前现状</h3>
+            <p class="section-desc">这块给家里人看最直观：店在哪里、准备到哪一步、每天要看什么。</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <article class="card status-card">
+            <span class="tag">开业时间</span>
+            <strong id="statusOpenDay">2026-06-01</strong>
+            <p class="section-desc">开业前看倒计时，开业后自动变成第几天。</p>
+          </article>
+          <article class="card status-card">
+            <span class="tag">店铺位置</span>
+            <strong>御景公馆对面</strong>
+            <p class="section-desc">后续可以补地图、门头照片和导航入口。</p>
+          </article>
+          <article class="card status-card">
+            <span class="tag">经营底线</span>
+            <strong>清真手工水饺</strong>
+            <p class="section-desc">全店禁猪肉与酒类，菜单和宣传都按这个标准来。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>开店投入明细</h3>
+            <p class="section-desc">这些是开业前已经发生的支出，放在这里是为了让“钱花到哪里了”一眼清楚。</p>
+          </div>
+          <span class="pill" id="investmentTotal">合计 ¥145,578</span>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>分类汇总</h3>
+            <div id="investmentSummary"></div>
+          </article>
+          <article class="card">
+            <h3>资金提醒</h3>
+            <div class="calc-row"><span>已记录开店支出</span><strong id="investmentRecorded">¥145,578</strong></div>
+            <div class="calc-row"><span>真实总投入预估</span><strong>约 ¥200,000</strong></div>
+            <div class="calc-row"><span>还需预留</span><strong id="workingCapitalGap">约 ¥54,422</strong></div>
+            <p class="section-desc">预留部分包含开业前剩余支出和头三个月周转金。</p>
+          </article>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="investment-list" id="investmentList"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-growth">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>成长里程碑</h3>
+            <p class="section-desc">把辛苦变成看得见的成就，店会一天天更有底气。</p>
+          </div>
+        </div>
+        <div class="grid three" id="milestones"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-story">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>饺子的故事</h3>
+            <p class="section-desc">品牌资产先从第一家店开始沉淀，以后每家加盟店都能复用。</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>关于马小溪</h3>
+            <p class="section-desc">十年用心包，不是口号，是每天从和面、擀皮、调馅开始的老手艺。清真、手工、家常，是这家店最朴素也最重要的底色。</p>
+            <div class="calc-row"><span>经营类别</span><strong>清真餐饮</strong></div>
+            <div class="calc-row"><span>开业日期</span><strong>2026-06-01</strong></div>
+            <div class="calc-row"><span>店铺地址</span><strong>御景公馆对面</strong></div>
+          </article>
+          <article class="card">
+            <h3>看得见的用心</h3>
+            <p class="section-desc">牛羊肉、面粉、蔬菜采购来源可以在这里慢慢补齐。每一条都不是为了复杂，而是让客人放心。</p>
+            <div class="calc-row"><span>清真要求</span><strong>全店禁猪肉与酒类</strong></div>
+            <div class="calc-row"><span>店面印象</span><strong>明亮、温馨、开放厨房</strong></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>菜单展示</h3>
+            <p class="section-desc">先放核心菜品，照片后面可以逐个替换成真实店内图片。</p>
+          </div>
+        </div>
+        <div class="grid three" id="menuGrid"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-heart">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>进步</h3>
+            <p class="section-desc">不是鸡汤，是开小店每天可以拿出来想一想的经营原则。</p>
+          </div>
+        </div>
+        <div class="grid three" id="principleGrid"></div>
+      </div>
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>每周复盘</h3>
+            <p class="section-desc">无聊时翻一翻，忙时照着问三句。小店做大，靠的就是持续修正。</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <article class="card message">这周哪一道菜被客人主动夸了？它能不能成为招牌？</article>
+          <article class="card message">这周哪一笔成本最容易被忽略？下周能不能提前控制？</article>
+          <article class="card message">有没有客人第二次来？他为什么回来？</article>
+          <article class="card message">今天如果只改进一件小事，应该是出餐、卫生、服务还是记账？</article>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-ops">
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <h3>送货和库存</h3>
+            <p class="section-desc">送货辛苦也要被看见，关键食材不够时提前提醒。</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>送货记录</h3>
+            <div class="list-row"><span>本月送货次数</span><strong id="deliveryCountMonth">0 次</strong></div>
+            <div class="list-row"><span>配送费用累计</span><strong id="brotherFee">¥0</strong></div>
+            <div class="list-row"><span>近距离标准</span><strong>¥10</strong></div>
+            <div class="list-row"><span>远距离标准</span><strong>¥20</strong></div>
+          </article>
+          <article class="card">
+            <h3>库存提醒</h3>
+            <div class="list-row"><span>面粉</span><strong>正常</strong></div>
+            <div class="list-row"><span>牛羊肉</span><strong>需要每日确认</strong></div>
+            <div class="list-row"><span>一次性餐盒</span><strong>低于 100 个提醒</strong></div>
+            <div class="list-row"><span>采购价格</span><strong>后续记录趋势</strong></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="页面切换">
+      <button class="tab active" data-tab="today" type="button">今天</button>
+      <button class="tab" data-tab="ledger" type="button">记账</button>
+      <button class="tab" data-tab="partner" type="button">概览</button>
+      <button class="tab" data-tab="growth" type="button">成长</button>
+      <button class="tab" data-tab="story" type="button">故事</button>
+      <button class="tab" data-tab="heart" type="button">进步</button>
+      <button class="tab" data-tab="ops" type="button">送货</button>
+    </nav>
+  </main>
+
+  <div class="toast" id="toast">已保存</div>
+  <div class="confetti" id="confetti"></div>
+
+  <script>
+    const STORE_KEY = "maxiaoxi-dashboard-v1";
+    const OPEN_DATE = new Date("2026-06-01T00:00:00");
+    const MONTH_TARGET = 10000;
+    const INITIAL_TOTAL_INVESTMENT = 145578;
+    const TOTAL_INVESTMENT_ESTIMATE = 200000;
+
+    const lines = [
+      "好饭不怕晚，好店慢慢开。",
+      "账清楚，心里才有底；味道稳，客人才会回头。",
+      "小店不是一天做大的，是每天少犯一个错、多留住一个人。",
+      "先把一碗饭做好，再谈一家店；先把一家店做好，再谈一条街。",
+      "对客人真诚，对成本清醒，对手艺敬畏。"
+    ];
+
+    const menu = [
+      ["鲜肉马蹄", "¥18", "马蹄要现剁才脆，是店里的爽口招牌。"],
+      ["鲜肉酸菜", "¥18", "酸菜香、肉馅足，热乎乎一盘最踏实。"],
+      ["鲜肉荠菜", "¥18", "荠菜清香，适合想吃清爽口味的客人。"],
+      ["鲜肉茴香", "¥18", "老味道，吃一口就像家里刚出锅。"],
+      ["鲜肉芹菜", "¥16", "芹菜鲜亮，日常复购款。"],
+      ["招牌素三鲜", "¥16", "不靠重口，靠新鲜和手艺。"],
+      ["招牌虾仁", "¥20", "一口鲜，适合做门店招牌图。"],
+      ["邢州招牌凉拼", "¥12", "开胃小菜，等饺子时正合适。"],
+      ["家常土豆丝", "¥10", "清爽热菜，简单但最考验火候。"]
+    ];
+
+    const investments = [
+      ["房租", "房租 5万 + 押金 2000", 52000],
+      ["装修", "装修工程", 54000],
+      ["装修", "椅子", 10000],
+      ["设备", "煮饺子锅 + 压面机", 7800],
+      ["设备", "空调（大）", 5000],
+      ["设备", "改下水", 3000],
+      ["装修", "桌子", 2600],
+      ["设备", "馄饨皮机", 2400],
+      ["设备", "小空调", 1899],
+      ["品牌", "商标注册", 1500],
+      ["品牌", "广告灯箱", 1500],
+      ["设备", "监控", 1200],
+      ["装修", "砌墙", 1000],
+      ["杂项", "拉垃圾", 500],
+      ["杂项", "小东西", 500],
+      ["设备", "微波炉", 379],
+      ["杂项", "办证", 200],
+      ["杂项", "运费", 100]
+    ];
+
+    const principles = [
+      ["慢", "好饭不怕晚，好店慢慢开。慢不是拖，是把每一步做稳。"],
+      ["清楚", "每天的账要清楚。看得见现金，才看得见风险。"],
+      ["复购", "新客靠热闹，老客靠稳定。能让人再来，才是真本事。"],
+      ["成本", "成本不是越低越好，是每一分钱都知道为什么花。"],
+      ["手艺", "手工不是噱头，是味道、卫生、出品都经得起重复。"],
+      ["客人", "对客人多一点真诚，对差评多一点耐心，对夸奖多一点记录。"],
+      ["菜单", "菜单不一定要多，但每个留下来的菜都要有理由。"],
+      ["规模", "第一家店先练基本功，第二家店才复制方法。"],
+      ["品牌", "品牌不是牌子，是客人想吃饺子时能想起你。"]
+    ];
+
+    const milestones = [
+      ["开业第一天", "2026 年 6 月 1 日，小店正式亮灯。", "open"],
+      ["卖出第 100 份饺子", "第一批熟客会从这里开始。", "orders100"],
+      ["服务第 100 位客人", "把每一位客人都照顾好。", "guests100"],
+      ["单日营业额破 3000", "当天自动撒花。", "rev3000"],
+      ["单日营业额破 5000", "说明店开始跑起来了。", "rev5000"],
+      ["单月净利润破 1 万", "第一阶段经营验证。", "profit10000"],
+      ["开业满 100 天", "从新店变成社区熟面孔。", "day100"],
+      ["准备好开第二家店", "制度、菜单、账本都能复制。", "second"]
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const money = (n) => "¥" + Math.round(Number(n) || 0).toLocaleString("zh-CN");
+    const num = (id) => Number(($(id).value || "0").replace(/,/g, "")) || 0;
+    const todayKey = () => new Date().toISOString().slice(0, 10);
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORE_KEY)) || { entries: {} };
+      } catch {
+        return { entries: {} };
+      }
+    }
+
+    function saveState(state) {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    }
+
+    let state = loadState();
+    state.entries = state.entries || {};
+
+    function entryTotals(entry = {}) {
+      const normalized = normalizeEntry(entry);
+      const revenue = normalized.incomeItems.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+      const expense = normalized.expenseItems.reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+      const profit = revenue - expense;
+      return { revenue, expense, profit };
+    }
+
+    function normalizeEntry(entry = {}) {
+      const oldIncome = [
+        ["微信收款", "堂食/到店", entry.wechat],
+        ["支付宝收款", "堂食/到店", entry.alipay],
+        ["现金收款", "堂食/到店", entry.cash],
+        ["外卖平台", "外卖平台", entry.deliveryPlatform]
+      ].filter(([, , amount]) => Number(amount) > 0).map(([name, category, amount]) => ({ name, category, amount: Number(amount) || 0 }));
+      const oldExpense = [
+        ["食材采购", "食材", entry.ingredients],
+        ["房租水电", "固定成本", entry.utilities],
+        ["雇员工资", "人工", entry.salary],
+        ["送货费", "配送", entry.deliveryCost],
+        ["杂项", "其他", entry.misc]
+      ].filter(([, , amount]) => Number(amount) > 0).map(([name, category, amount]) => ({ name, category, amount: Number(amount) || 0 }));
+      return {
+        orders: Number(entry.orders) || 0,
+        note: entry.note || "",
+        incomeItems: Array.isArray(entry.incomeItems) ? entry.incomeItems : oldIncome,
+        expenseItems: Array.isArray(entry.expenseItems) ? entry.expenseItems : oldExpense
+      };
+    }
+
+    function currentMonthEntries() {
+      const ym = todayKey().slice(0, 7);
+      return Object.entries(state.entries).filter(([date]) => date.startsWith(ym));
+    }
+
+    function allEntriesSorted() {
+      return Object.entries(state.entries).sort(([a], [b]) => b.localeCompare(a));
+    }
+
+    function sumEntries(entries) {
+      return entries.reduce((acc, [, entry]) => {
+        const totals = entryTotals(entry);
+        const normalized = normalizeEntry(entry);
+        acc.revenue += totals.revenue;
+        acc.expense += totals.expense;
+        acc.profit += totals.profit;
+        acc.orders += Number(normalized.orders) || 0;
+        acc.delivery += normalized.expenseItems
+          .filter((item) => item.category === "配送" || item.name.includes("送货"))
+          .reduce((sum, item) => sum + (Number(item.amount) || 0), 0);
+        return acc;
+      }, { revenue: 0, expense: 0, profit: 0, orders: 0, delivery: 0 });
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const diff = Math.floor((now - OPEN_DATE) / 86400000) + 1;
+      const dateOptions = { year: "numeric", month: "long", day: "numeric", weekday: "long" };
+      const timeOptions = { hour: "2-digit", minute: "2-digit", hour12: false };
+      $("beijingDate").textContent = now.toLocaleDateString("zh-CN", { ...dateOptions, timeZone: "Asia/Shanghai" });
+      $("beijingTime").textContent = now.toLocaleTimeString("zh-CN", { ...timeOptions, timeZone: "Asia/Shanghai" });
+      $("mexicoDate").textContent = now.toLocaleDateString("zh-CN", { ...dateOptions, timeZone: "America/Mexico_City" });
+      $("mexicoTime").textContent = now.toLocaleTimeString("zh-CN", { ...timeOptions, timeZone: "America/Mexico_City" });
+      $("openDay").textContent = diff > 0 ? `开业第 ${diff} 天` : `距离开业还有 ${Math.abs(diff) + 1} 天`;
+      $("statusOpenDay").textContent = diff > 0 ? `开业第 ${diff} 天` : `倒计时 ${Math.abs(diff) + 1} 天`;
+      $("dailyLine").textContent = lines[now.getDate() % lines.length];
+    }
+
+    function fillFormFromToday() {
+      const entry = normalizeEntry(state.entries[todayKey()] || {});
+      $("orders").value = entry.orders || "";
+      $("note").value = entry.note || "";
+      renderEntryItems("income", entry.incomeItems.length ? entry.incomeItems : [{ name: "微信收款", category: "堂食/到店", amount: "" }]);
+      renderEntryItems("expense", entry.expenseItems.length ? entry.expenseItems : [{ name: "食材采购", category: "食材", amount: "" }]);
+      updateLiveCalc(false);
+    }
+
+    function updateLiveCalc(persist = false) {
+      const entry = formEntry();
+      const totals = entryTotals(entry);
+      $("calcRevenue").textContent = money(totals.revenue);
+      $("calcExpense").textContent = money(totals.expense);
+      $("calcProfit").textContent = money(totals.profit);
+      if (persist) {
+        state.entries[todayKey()] = entry;
+        saveState(state);
+        updateDashboard();
+      }
+    }
+
+    function formEntry() {
+      return {
+        orders: num("orders"),
+        incomeItems: collectEntryItems("income"),
+        expenseItems: collectEntryItems("expense"),
+        note: $("note").value.trim()
+      };
+    }
+
+    function renderEntryItems(type, items) {
+      const container = $(type === "income" ? "incomeItems" : "expenseItems");
+      container.innerHTML = items.map((item) => entryLineTemplate(type, item)).join("");
+      container.querySelectorAll("input, select").forEach((input) => input.addEventListener("input", () => updateLiveCalc(true)));
+      container.querySelectorAll("[data-remove-line]").forEach((button) => button.addEventListener("click", () => {
+        button.closest(".entry-line").remove();
+        updateLiveCalc(true);
+      }));
+    }
+
+    function entryLineTemplate(type, item = {}) {
+      const categories = type === "income"
+        ? ["堂食/到店", "外卖平台", "团购", "其他收入"]
+        : ["食材", "人工", "固定成本", "配送", "设备", "装修", "品牌", "其他成本"];
+      return `
+        <div class="entry-line" data-entry-type="${type}">
+          <input data-name placeholder="${type === "income" ? "收入名称" : "支出名称"}" value="${escapeHtml(item.name || "")}">
+          <select data-category>${categories.map((category) => `<option value="${category}" ${category === item.category ? "selected" : ""}>${category}</option>`).join("")}</select>
+          <input data-amount inputmode="decimal" placeholder="金额" value="${item.amount || ""}">
+          <button class="icon-btn" type="button" data-remove-line title="删除">×</button>
+        </div>
+      `;
+    }
+
+    function addEntryItem(type, name = "") {
+      const current = collectEntryItems(type);
+      const incomeCategory = name === "外卖平台" ? "外卖平台" : "堂食/到店";
+      const expenseMap = { "食材采购": "食材", "房租水电": "固定成本", "雇员工资": "人工", "送货费": "配送" };
+      const fallback = type === "income" ? incomeCategory : (expenseMap[name] || "其他成本");
+      current.push({ name, category: fallback, amount: "" });
+      renderEntryItems(type, current);
+    }
+
+    function collectEntryItems(type) {
+      const container = $(type === "income" ? "incomeItems" : "expenseItems");
+      return Array.from(container.querySelectorAll(".entry-line")).map((line) => ({
+        name: line.querySelector("[data-name]").value.trim() || (type === "income" ? "未命名收入" : "未命名支出"),
+        category: line.querySelector("[data-category]").value,
+        amount: Number((line.querySelector("[data-amount]").value || "0").replace(/,/g, "")) || 0
+      })).filter((item) => item.name || item.amount);
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    }
+
+    function setTrend(id, current, previous) {
+      const el = $(id);
+      if (!previous) {
+        el.textContent = "↑ 0%";
+        el.classList.remove("down");
+        return;
+      }
+      const pct = Math.round(((current - previous) / previous) * 100);
+      el.textContent = `${pct >= 0 ? "↑" : "↓"} ${Math.abs(pct)}%`;
+      el.classList.toggle("down", pct < 0);
+    }
+
+    function updateDashboard() {
+      const today = state.entries[todayKey()] || {};
+      const yesterday = state.entries[new Date(Date.now() - 86400000).toISOString().slice(0, 10)] || {};
+      const todayTotals = entryTotals(today);
+      const yTotals = entryTotals(yesterday);
+      const monthTotals = sumEntries(currentMonthEntries());
+      const allTotals = sumEntries(allEntriesSorted());
+      const monthProgress = Math.min(100, (monthTotals.revenue / MONTH_TARGET) * 100);
+      const daysOpen = Math.max(1, Math.floor((new Date() - OPEN_DATE) / 86400000) + 1);
+      const recordDays = allEntriesSorted().length;
+      const avgTicket = allTotals.orders > 0 ? allTotals.revenue / allTotals.orders : 0;
+      const avgDailyRevenue = recordDays > 0 ? allTotals.revenue / recordDays : 0;
+
+      $("todayRevenue").textContent = money(todayTotals.revenue);
+      $("todayOrders").textContent = Number(normalizeEntry(today).orders || 0).toLocaleString("zh-CN");
+      $("todayProfit").textContent = money(todayTotals.profit);
+      $("todayExpense").textContent = money(todayTotals.expense);
+      setTrend("revenueTrend", todayTotals.revenue, yTotals.revenue);
+      setTrend("orderTrend", Number(normalizeEntry(today).orders) || 0, Number(normalizeEntry(yesterday).orders) || 0);
+      setTrend("profitTrend", todayTotals.profit, yTotals.profit);
+
+      $("monthRevenue").textContent = money(monthTotals.revenue);
+      $("monthProfit").textContent = money(monthTotals.profit);
+      $("monthGap").textContent = money(Math.max(0, MONTH_TARGET - monthTotals.revenue));
+      $("monthBar").style.width = monthProgress + "%";
+      $("monthExpense").textContent = money(monthTotals.expense);
+      $("monthAvgOrder").textContent = money(monthTotals.orders > 0 ? monthTotals.revenue / monthTotals.orders : 0);
+      $("deliveryFeeMonth").textContent = money(monthTotals.delivery);
+
+      $("totalRevenue").textContent = money(allTotals.revenue);
+      $("totalOrders").textContent = allTotals.orders.toLocaleString("zh-CN");
+      $("totalExpense").textContent = money(allTotals.expense);
+      $("totalProfit").textContent = money(allTotals.profit);
+      $("avgTicket").textContent = money(avgTicket);
+      $("revenueBar").style.width = Math.min(100, (allTotals.revenue / INITIAL_TOTAL_INVESTMENT) * 100) + "%";
+      $("recordDays").textContent = `${recordDays} 天`;
+      $("avgDailyRevenue").textContent = money(avgDailyRevenue);
+      $("monthRate").textContent = Math.round(monthProgress) + "%";
+      $("deliveryCountMonth").textContent = currentMonthEntries().filter(([, e]) => {
+        return normalizeEntry(e).expenseItems.some((item) => (item.category === "配送" || item.name.includes("送货")) && Number(item.amount) > 0);
+      }).length + " 次";
+      $("brotherFee").textContent = money(monthTotals.delivery);
+
+      renderHistory();
+      renderCharts();
+      renderMilestones(allTotals, todayTotals, daysOpen);
+      renderInvestments();
+    }
+
+    function renderCharts() {
+      const entries = state.entries;
+      const values = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        values.push(entryTotals(entries[d] || {}).revenue);
+      }
+      const max = Math.max(...values, 100);
+      const points = values.map((v, i) => `${24 + i * 78},${158 - (v / max) * 120}`).join(" ");
+      $("revenueLine").innerHTML = `
+        <path d="M24 158 H496" stroke="#eadfbe" stroke-width="2"/>
+        <polyline points="${points}" fill="none" stroke="#6f8f12" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        ${points.split(" ").map((p) => `<circle cx="${p.split(",")[0]}" cy="${p.split(",")[1]}" r="6" fill="#e8a766" stroke="#fffdf6" stroke-width="3"/>`).join("")}
+      `;
+
+      const bars = [];
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        bars.push(Math.max(0, entryTotals(entries[d] || {}).profit));
+      }
+      const barMax = Math.max(...bars, 100);
+      $("profitBars").innerHTML = bars.map((v) => `<i style="height:${Math.max(5, (v / barMax) * 145)}px"></i>`).join("");
+    }
+
+    function renderHistory() {
+      const list = allEntriesSorted().slice(0, 12);
+      if (!list.length) {
+        $("historyList").innerHTML = `<p class="section-desc">还没有记录。今晚打烊后，第一笔账就会出现在这里。</p>`;
+        return;
+      }
+      $("historyList").innerHTML = list.map(([date, entry]) => {
+        const totals = entryTotals(entry);
+        return `<div class="list-row"><span>${date}${entry.note ? " · " + entry.note : ""}</span><strong>${money(totals.revenue)} / 净 ${money(totals.profit)}</strong></div>`;
+      }).join("");
+    }
+
+    function renderMilestones(allTotals, todayTotals, daysOpen) {
+      const done = {
+        open: daysOpen >= 1,
+        orders100: allTotals.orders >= 100,
+        guests100: allTotals.orders >= 100,
+        rev3000: todayTotals.revenue >= 3000 || allEntriesSorted().some(([, e]) => entryTotals(e).revenue >= 3000),
+        rev5000: todayTotals.revenue >= 5000 || allEntriesSorted().some(([, e]) => entryTotals(e).revenue >= 5000),
+        profit10000: currentMonthEntries().length && sumEntries(currentMonthEntries()).profit >= 10000,
+        day100: daysOpen >= 100,
+        second: Math.max(0, allTotals.profit) >= 60000
+      };
+      $("milestones").innerHTML = milestones.map(([title, desc, key]) => (
+        `<article class="card milestone ${done[key] ? "done" : ""}"><h4>${title}</h4><p>${done[key] ? "已解锁 · " : ""}${desc}</p></article>`
+      )).join("");
+    }
+
+    function renderMenu() {
+      $("menuGrid").innerHTML = menu.map(([name, price, desc]) => `
+        <article class="card menu-card">
+          <div class="food-art"></div>
+          <div><h4>${name} <span class="price">${price}</span></h4><p>${desc}</p></div>
+        </article>
+      `).join("");
+    }
+
+    function renderPrinciples() {
+      $("principleGrid").innerHTML = principles.map(([title, text]) => `
+        <article class="card status-card">
+          <span class="tag">${title}</span>
+          <strong>${text.split("。")[0]}。</strong>
+          <p class="section-desc">${text.split("。").slice(1).join("。")}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderInvestments() {
+      const total = investments.reduce((sum, [, , amount]) => sum + amount, 0);
+      const byCategory = investments.reduce((acc, [category, , amount]) => {
+        acc[category] = (acc[category] || 0) + amount;
+        return acc;
+      }, {});
+
+      $("investmentTotal").textContent = `合计 ${money(total)}`;
+      $("investmentRecorded").textContent = money(total);
+      $("workingCapitalGap").textContent = `约 ${money(Math.max(0, TOTAL_INVESTMENT_ESTIMATE - total))}`;
+      $("investmentSummary").innerHTML = Object.entries(byCategory)
+        .sort(([, a], [, b]) => b - a)
+        .map(([category, amount]) => `<div class="calc-row"><span>${category}</span><strong>${money(amount)}</strong></div>`)
+        .join("");
+      $("investmentList").innerHTML = investments
+        .map(([category, item, amount]) => `<div class="investment-row"><span class="tag">${category}</span><span>${item}</span><strong>${money(amount)}</strong></div>`)
+        .join("");
+    }
+
+    function showToast(text) {
+      $("toast").textContent = text;
+      $("toast").classList.add("show");
+      setTimeout(() => $("toast").classList.remove("show"), 1800);
+    }
+
+    function celebrate() {
+      const box = $("confetti");
+      box.innerHTML = "";
+      for (let i = 0; i < 42; i++) {
+        const piece = document.createElement("b");
+        piece.style.left = Math.random() * 100 + "%";
+        piece.style.animationDelay = Math.random() * .45 + "s";
+        piece.style.background = i % 3 === 0 ? "var(--green)" : i % 3 === 1 ? "var(--orange)" : "#fff2d2";
+        box.appendChild(piece);
+      }
+      setTimeout(() => box.innerHTML = "", 2100);
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tab === name));
+      document.querySelectorAll(".page").forEach((page) => page.classList.toggle("active", page.id === `page-${name}`));
+      window.scrollTo({ top: name === "today" ? 0 : $("home-hero").offsetHeight + 8, behavior: "smooth" });
+    }
+
+    document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => switchTab(tab.dataset.tab)));
+    document.querySelectorAll("[data-tab-link]").forEach((link) => link.addEventListener("click", (event) => {
+      event.preventDefault();
+      switchTab(link.dataset.tabLink);
+    }));
+    document.querySelectorAll("#ledgerForm input, #ledgerForm textarea").forEach((input) => input.addEventListener("input", () => updateLiveCalc(true)));
+    $("addIncome").addEventListener("click", () => addEntryItem("income"));
+    $("addExpense").addEventListener("click", () => addEntryItem("expense"));
+    document.querySelectorAll("[data-add-income]").forEach((button) => {
+      button.addEventListener("click", () => addEntryItem("income", button.dataset.addIncome));
+    });
+    document.querySelectorAll("[data-add-expense]").forEach((button) => {
+      button.addEventListener("click", () => addEntryItem("expense", button.dataset.addExpense));
+    });
+
+    function saveLedgerEntry() {
+      const beforeMax = Math.max(0, ...Object.values(state.entries).map((entry) => entryTotals(entry).revenue));
+      state.entries[todayKey()] = formEntry();
+      saveState(state);
+      fillFormFromToday();
+      updateDashboard();
+      showToast("今天的账已保存");
+      if (entryTotals(state.entries[todayKey()]).revenue > Math.max(3000, beforeMax)) celebrate();
+    }
+
+    $("saveLedger").addEventListener("click", saveLedgerEntry);
+    $("ledgerForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      saveLedgerEntry();
+    });
+
+    $("seedDemo").addEventListener("click", () => {
+      const samples = [
+        { offset: 0, orders: 112, incomeItems: [{ name: "微信收款", category: "堂食/到店", amount: 1360 }, { name: "支付宝收款", category: "堂食/到店", amount: 820 }, { name: "现金收款", category: "堂食/到店", amount: 320 }, { name: "外卖平台", category: "外卖平台", amount: 460 }], expenseItems: [{ name: "食材采购", category: "食材", amount: 780 }, { name: "水电摊销", category: "固定成本", amount: 120 }, { name: "人工", category: "人工", amount: 260 }, { name: "送货费", category: "配送", amount: 80 }, { name: "临时用品", category: "其他成本", amount: 35 }], note: "午饭时间满座，虾仁卖得快。" },
+        { offset: 1, orders: 86, incomeItems: [{ name: "微信收款", category: "堂食/到店", amount: 980 }, { name: "支付宝收款", category: "堂食/到店", amount: 760 }, { name: "现金收款", category: "堂食/到店", amount: 210 }, { name: "外卖平台", category: "外卖平台", amount: 340 }], expenseItems: [{ name: "食材采购", category: "食材", amount: 620 }, { name: "水电摊销", category: "固定成本", amount: 80 }, { name: "人工", category: "人工", amount: 260 }, { name: "送货费", category: "配送", amount: 50 }, { name: "杂物", category: "其他成本", amount: 20 }], note: "酸菜馅被客人夸了。" },
+        { offset: 2, orders: 128, incomeItems: [{ name: "微信收款", category: "堂食/到店", amount: 1520 }, { name: "支付宝收款", category: "堂食/到店", amount: 930 }, { name: "现金收款", category: "堂食/到店", amount: 430 }, { name: "外卖平台", category: "外卖平台", amount: 620 }], expenseItems: [{ name: "食材采购", category: "食材", amount: 840 }, { name: "水电摊销", category: "固定成本", amount: 100 }, { name: "人工", category: "人工", amount: 260 }, { name: "送货费", category: "配送", amount: 110 }, { name: "清洁用品", category: "其他成本", amount: 45 }], note: "晚高峰很忙，大家配合很好。" },
+        { offset: 3, orders: 72, incomeItems: [{ name: "微信收款", category: "堂食/到店", amount: 860 }, { name: "支付宝收款", category: "堂食/到店", amount: 640 }, { name: "现金收款", category: "堂食/到店", amount: 170 }, { name: "外卖平台", category: "外卖平台", amount: 280 }], expenseItems: [{ name: "食材采购", category: "食材", amount: 560 }, { name: "水电摊销", category: "固定成本", amount: 75 }, { name: "人工", category: "人工", amount: 260 }, { name: "送货费", category: "配送", amount: 30 }, { name: "杂物", category: "其他成本", amount: 18 }], note: "雨天，堂食少一些。" },
+        { offset: 4, orders: 98, incomeItems: [{ name: "微信收款", category: "堂食/到店", amount: 1180 }, { name: "支付宝收款", category: "堂食/到店", amount: 790 }, { name: "现金收款", category: "堂食/到店", amount: 260 }, { name: "外卖平台", category: "外卖平台", amount: 510 }], expenseItems: [{ name: "食材采购", category: "食材", amount: 700 }, { name: "水电摊销", category: "固定成本", amount: 90 }, { name: "人工", category: "人工", amount: 260 }, { name: "送货费", category: "配送", amount: 70 }, { name: "包装袋", category: "其他成本", amount: 22 }], note: "有客人问加盟电话。" }
+      ];
+      samples.forEach((sample) => {
+        const d = new Date(Date.now() - sample.offset * 86400000).toISOString().slice(0, 10);
+        state.entries[d] = sample;
+      });
+      saveState(state);
+      fillFormFromToday();
+      updateDashboard();
+      showToast("示例数据已填好");
+      celebrate();
+    });
+
+    $("exportCsv").addEventListener("click", () => {
+      const header = ["日期", "类型", "名称", "分类", "金额", "订单", "净利润", "备注"];
+      const rows = allEntriesSorted().map(([date, e]) => {
+        const normalized = normalizeEntry(e);
+        const t = entryTotals(e);
+        const incomeRows = normalized.incomeItems.map((item) => [date, "收入", item.name, item.category, item.amount, normalized.orders, t.profit, normalized.note || ""]);
+        const expenseRows = normalized.expenseItems.map((item) => [date, "支出", item.name, item.category, item.amount, normalized.orders, t.profit, normalized.note || ""]);
+        return [...incomeRows, ...expenseRows];
+      }).flat();
+      const csv = [header, ...rows].map((row) => row.map((cell) => `"${String(cell ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "马小溪手工饺子账本.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    updateClock();
+    renderMenu();
+    renderPrinciples();
+    fillFormFromToday();
+    updateDashboard();
+  </script>
+</body>
+</html>
